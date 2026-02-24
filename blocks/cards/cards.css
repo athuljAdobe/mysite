@@ -25,6 +25,18 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
-.cards block ul{
-  background-color: pink;
+.cards.block ul li {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.cards.block ul li:hover {
+  transform: translateY(-5px);
+}
+.cards-wrapper {
+  background-color: #f2bd0e;
+  padding: 40px 0;
 }
