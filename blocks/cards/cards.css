@@ -37,6 +37,11 @@
   transform: translateY(-5px);
 }
 .cards-wrapper {
-  background-color: #f2bd0e;
+  background-color: #ffffff;
   padding: 40px 0;
+}
+.cards.block ul li {
+  background-color: #7e1696;
+  padding: 20px;
+  border-radius: 12px;
 }
