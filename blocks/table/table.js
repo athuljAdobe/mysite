@@ -1,76 +1,71 @@
-async function createTableHeader(table) {
-  let tr = document.createElement("tr");
+async function createTableHeader(table, columns) {
+  const tr = document.createElement("tr");
 
-  let sno = document.createElement("th");
-  sno.appendChild(document.createTextNode("S.No"));
-
-  let country = document.createElement("th");
-  country.appendChild(document.createTextNode("Countries"));
-
-  let continent = document.createElement("th");
-  continent.appendChild(document.createTextNode("Continent"));
-
-  let capital = document.createElement("th");
-  capital.appendChild(document.createTextNode("Capital"));
-
-  let abbr = document.createElement("th");
-  abbr.appendChild(document.createTextNode("Abbreviation"));
-
-  tr.append(sno);
-  tr.append(country);
-  tr.append(continent);
-  tr.append(capital);
-  tr.append(abbr);
+  columns.forEach(col => {
+    const th = document.createElement("th");
+    th.textContent = col;
+    tr.append(th);
+  });
 
   table.append(tr);
 }
 
-async function createTableRow(table, row, i) {
-  let tr = document.createElement("tr");
+async function createTableRow(table, row, columns, index) {
+  const tr = document.createElement("tr");
 
-  let sno = document.createElement("td");
-  sno.appendChild(document.createTextNode(i));
+  columns.forEach(col => {
+    const td = document.createElement("td");
 
-  let country = document.createElement("td");
-  country.appendChild(document.createTextNode(row.Country));
+    if (col === "S.No") {
+      td.textContent = index;
+    } else {
+      td.textContent = row[col] || "-";
+    }
 
-  let continent = document.createElement("td");
-  continent.appendChild(document.createTextNode(row.Continent));
-
-  let capital = document.createElement("td");
-  capital.appendChild(document.createTextNode(row.Capital));
-
-  let abbr = document.createElement("td");
-  abbr.appendChild(document.createTextNode(row.Abbreviation));
-
-  tr.append(sno);
-  tr.append(country);
-  tr.append(continent);
-  tr.append(capital);
-  tr.append(abbr);
+    tr.append(td);
+  });
 
   table.append(tr);
 }
 
-async function createTable(jsonURL, val) {
-  let pathname = null;
+async function createTable(jsonURL, sheetValue) {
+  let url = jsonURL;
 
-  if (val) {
-    pathname = jsonURL;
-  } else {
-    pathname = new URL(jsonURL);
+  // If sheet selected
+  if (sheetValue && sheetValue !== "all") {
+    url = `${jsonURL}?sheet=${sheetValue}`;
   }
 
-  const resp = await fetch(pathname);
+  const resp = await fetch(url);
   const json = await resp.json();
-  console.log("===== JSON =====>", json);
+
+  let dataArray = [];
+
+  // Case 1: Multi-sheet JSON
+  if (json[":type"] === "multi-sheet") {
+    dataArray = json.data.data; // default first sheet
+  }
+  // Case 2: Single sheet response
+  else if (json.data) {
+    dataArray = json.data;
+  }
 
   const table = document.createElement("table");
 
-  await createTableHeader(table);
+  if (!dataArray || dataArray.length === 0) {
+    return table;
+  }
 
-  json.data.forEach((row, i) => {
-    createTableRow(table, row, i + 1);
+  // Dynamic columns from first object
+  const dynamicColumns = Object.keys(dataArray[0]);
+
+  // Add serial number column
+  const columns = ["S.No", ...dynamicColumns];
+
+  await createTableHeader(table, columns);
+
+  dataArray.forEach((row, i) => {
+    createTableRow(table, row, columns, i + 1);
   });
 
   return table;
@@ -78,13 +73,32 @@ async function createTable(jsonURL, val) {
 
 export default async function decorate(block) {
   const countries = block.querySelector('a[href$=".json"]');
-  console.log(countries);
+  if (!countries) return;
 
   const parentDiv = document.createElement("div");
   parentDiv.classList.add("countries-block");
 
-  if (countries) {
-    parentDiv.append(await createTable(countries.href, null));
-    countries.replaceWith(parentDiv);
-  }
+  // ✅ Create dropdown
+  const dropdown = document.createElement("select");
+  dropdown.id = "region";
+
+  dropdown.innerHTML = `
+    <option value="all">All</option>
+    <option value="helix-India">India Sheet</option>
+  `;
+
+  parentDiv.append(dropdown);
+
+  // ✅ Initial table load
+  const table = await createTable(countries.href, "all");
+  parentDiv.append(table);
+
+  countries.replaceWith(parentDiv);
+
+  // ✅ Dropdown change event
+  dropdown.addEventListener("change", async () => {
+    const newTable = await createTable(countries.href, dropdown.value);
+    const oldTable = parentDiv.querySelector("table");
+    oldTable.replaceWith(newTable);
+  });
 }
