@@ -255,3 +255,10 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+main .yellow{
+  background-color: yellow
+}
+
+main .white-text{
+  color: white;
+}

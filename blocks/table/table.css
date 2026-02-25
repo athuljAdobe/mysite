@@ -1,0 +1,66 @@
+/* Container */
+.countries-block {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+/* Table Styling */
+.countries-block table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header */
+.countries-block th {
+  background-color: #1e3a8a;
+  color: #ffffff;
+  text-align: left;
+  padding: 12px 15px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* Table Cells */
+.countries-block td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Zebra Striping */
+.countries-block tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* Hover Effect */
+.countries-block tr:hover {
+  background-color: #eef2ff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* First Column (S.No) */
+.countries-block td:first-child,
+.countries-block th:first-child {
+  text-align: center;
+  width: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .countries-block table {
+    font-size: 13px;
+  }
+
+  .countries-block th,
+  .countries-block td {
+    padding: 10px;
+  }
+}
