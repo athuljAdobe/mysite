@@ -456,6 +456,63 @@ function decorateButtons(element) {
 }
 
 /**
+ * Gets placeholders object.
+ * @param {string} [prefix] Location of placeholders
+ * @returns {object} Window placeholders object
+ */
+
+// eslint-disable-next-line import/prefer-default-export
+async function fetchPlaceholders(prefix = 'default') {
+  window.placeholders = window.placeholders || {};
+
+  if (!window.placeholders[prefix]) {
+    window.placeholders[prefix] = new Promise((resolve) => {
+      let localizedURL = new URL(
+        `${window.location.origin}/${prefix}/placeholders.json`
+      );
+
+      if (prefix === '') {
+        localizedURL = new URL(
+          `${window.location.origin}/placeholders.json`
+        );
+      }
+
+      fetch(localizedURL)
+        .then((resp) => (resp.ok ? resp.json() : {}))
+        .then((json) => {
+          const placeholders = {};
+
+          if (json.data) {
+            json.data.forEach((placeholder) => {
+              const key =
+                placeholder.Key ||
+                placeholder['Clé'];
+
+              const text =
+                placeholder.Text ||
+                placeholder['Texte'];
+
+              if (key && text) {
+                placeholders[toCamelCase(key)] = text;
+              }
+            });
+          }
+
+          window.placeholders[prefix] = placeholders;
+          resolve(window.placeholders[prefix]);
+        })
+        .catch(() => {
+          window.placeholders[prefix] = {};
+          resolve(window.placeholders[prefix]);
+        });
+    });
+  }
+
+  return window.placeholders[prefix];
+}
+
+
+/**
  * Add <img> for icon, prefixed with codeBasePath and optional prefix.
  * @param {Element} [span] span element with icon classes
  * @param {string} [prefix] prefix to be added to icon src
@@ -711,6 +768,7 @@ export {
   decorateIcons,
   decorateSections,
   decorateTemplateAndTheme,
+  fetchPlaceholders,   // ✅ ADD THIS
   getMetadata,
   loadBlock,
   loadCSS,

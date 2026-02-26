@@ -1,0 +1,29 @@
+.author table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin: 20px 0;
+}
+
+.author th {
+  background-color: #f5f5f5;
+  font-size: 20px;
+  text-align: center;
+  padding: 12px;
+  border: 2px solid #ccc;
+}
+
+.author td {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.author tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.author td:first-child {
+  font-weight: 600;
+  width: 40%;
+}
