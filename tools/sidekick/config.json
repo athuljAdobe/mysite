@@ -1,6 +1,25 @@
 {
     "plugins": [
   {
+  "id": "contact-us-palette",
+  "title": "Contact US Palette",
+  "environments": ["edit"],
+  "url": "/tools/contactus/contactus.html",
+  "passConfig": true,
+  "passReferrer": true,
+  "includePaths": [
+    "**.docx**"
+  ],
+  "isPalette": true,
+  "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)"
+},{
+  "id": "contact-us-page",
+  "title": "Contact US Page",
+  "environments": ["edit"],
+  "url": "/tools/contactus/contactus.html",
+  "passConfig": true,
+  "passReferrer": true
+}, {
     "id":"google-assist",
     "title":"Google Assist",
     "environments":["edit", "dev", "preview", "live", "prod"],
