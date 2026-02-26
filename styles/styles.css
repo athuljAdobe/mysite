@@ -262,3 +262,8 @@ main .yellow{
 main .white-text{
   color: white;
 }
+
+.highlight-red {
+  color: #e60023;
+  font-weight: 600;
+}

@@ -147,6 +147,16 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+
+  document.querySelectorAll('.default-content-wrapper p').forEach((p) => {
+    p.innerHTML = p.innerHTML.replace(
+      'This',
+      '<span class="highlight-red">This</span>'
+    );
+  });
 }
+
+
+
 
 loadPage();
