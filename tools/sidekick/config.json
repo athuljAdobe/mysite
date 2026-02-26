@@ -62,6 +62,16 @@
   "isPalette": true,
   "passConfig": true,
   "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:600px; height: calc(100vh - 60px)"
+},
+  {"containerId": "tools",
+  "id": "contact-us-palette",
+  "title": "Contact US Palette",
+  "environments": ["edit"],
+  "url": "/tools/contactus/contactus.html",
+  "passConfig": true,
+  "passReferrer": true,
+  "isPalette": true,
+  "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)"
 }
 ]
 }
