@@ -1,0 +1,115 @@
+/* =========================
+   GLOBAL STYLING
+========================= */
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  min-height: 100vh;
+}
+
+/* =========================
+   CARD CONTAINER
+========================= */
+
+.bg-light {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  border: none;
+  transition: 0.3s ease;
+}
+
+.bg-light:hover {
+  transform: translateY(-5px);
+}
+
+/* =========================
+   ICON BOX
+========================= */
+
+.feature {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1 {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.lead {
+  color: #64748b !important;
+}
+
+/* =========================
+   FORM INPUTS
+========================= */
+
+.form-control {
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 16px 14px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.form-floating > label {
+  color: #64748b;
+}
+
+/* =========================
+   BUTTON STYLING
+========================= */
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+}
+
+/* =========================
+   SUCCESS / ERROR
+========================= */
+
+#submitSuccessMessage {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+#submitErrorMessage {
+  font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVE IMPROVEMENT
+========================= */
+
+@media (max-width: 768px) {
+  .bg-light {
+    padding: 2rem !important;
+  }
+}
