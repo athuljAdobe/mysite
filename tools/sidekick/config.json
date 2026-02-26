@@ -68,7 +68,7 @@
     "containerId": "tools",
   "id": "library",
   "title": "Block Library",
-  "environments": ["edit"],
+  "environments": ["edit", "dev", "preview", "live", "prod"],
   "url": "/tools/sidekick/library.html"
 }
 ]
