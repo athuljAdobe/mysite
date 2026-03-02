@@ -1,0 +1,13 @@
+{
+  "indices": [
+    {
+      "name": "pages",
+      "include": "/**",
+      "properties": [
+        { "name": "title", "value": "title" },
+        { "name": "description", "value": "description" },
+        { "name": "path", "value": "path" }
+      ]
+    }
+  ]
+}
