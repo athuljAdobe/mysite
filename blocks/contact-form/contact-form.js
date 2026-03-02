@@ -21,7 +21,7 @@ export default function decorate(block) {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbx1aspeq8iGVVZjXxxc9g0ZsNR61pxigpoZg54ZRYiemlgw10Bc3EykYTVqV5p3LjGn/exec", {
+      const response = await fetch("https://main--mysite--athuljadobe.aem.page/forms.json", {
         method: "POST",
         body: JSON.stringify(data),
       });
